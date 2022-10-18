@@ -1,22 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, TextInput } from 'react-native';
-import { styles } from './styles'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Login } from './pages/Login/login'
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const MyStack = () => {
+  const [fontsLoaded] = useFonts({
+    'Inter-Bold': require('./Fontes/Inter-Bold.ttf'),
+    'Andika-Regular': require('./Fontes/Andika-Regular.ttf')
+  });
+
+  if (!fontsLoaded) return <AppLoading/>
+
   return (
-    <View style={styles.container}>
-        
-        <TextInput
-          style={styles.textInput}
-          placeholder = "CPF / e-mail"
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Login}
+          options={{ title: 'Welcome' }}
         />
-
-        <TextInput
-          style = {styles.textInput}
-          placeholder = "Senha"
-        />
-      
-      <StatusBar style="auto" />
-    </View>
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };

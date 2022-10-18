@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         justifyContent: "center",
         paddingBottom: 2,
-        marginVertical: 50
+        marginVertical: 20
     },
     buttonTitle: {
         fontFamily: "Inter-Bold",
@@ -38,5 +38,11 @@ export const styles = StyleSheet.create({
     logo: {
         fontFamily: "Andika-Regular",
         fontSize: 20,
+    },
+    link: {
+        fontFamily: "Andika-Regular",
+        fontSize: 12,
+        color: "#153586",
+        paddingTop: 10
     }
 });
