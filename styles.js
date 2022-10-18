@@ -7,6 +7,23 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonPaciente: {
+      fontSize: 14,
+      backgroundColor: "#153586",
+      width: 210,
+      height: 40,
+      borderRadius: 16,
+      justifyContent: 'center',
+      paddingBottom: 2,
+      marginVertical: 50
+    },
+    title: {
+      width:400,
+      height:120,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: "#153586"
+    },
     textInput: {
         alignItems: 'center',
         justifyContent: 'center',
