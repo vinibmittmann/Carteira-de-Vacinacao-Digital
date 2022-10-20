@@ -1,12 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { createStackNavigator } from "@react-navigation/stack";
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles'
 
 
-const Login = () => {
-    const Login = createStackNavigator();
-  
+export default function LoginScreen({ navigation })  {
     return (
         <View style = {styles.container}>
             
@@ -25,20 +22,19 @@ const Login = () => {
             />
 
             <TouchableOpacity
-            //style = {}
             >
                 <Text style={styles.link}>Esqueceu sua senha?</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
             style = {styles.button}
+            onPress = {() => navigation.navigate("Cadastro Paciente")}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
+                
             </TouchableOpacity>
         
         <StatusBar style="auto" />
         </View>
-  );
+    );
 };
-
-export default Login;

@@ -18,11 +18,12 @@ export const styles = StyleSheet.create({
       marginVertical: 50
     },
     title: {
-      width:400,
-      height:120,
+      width:410,
+      height:250,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#153586"
+      backgroundColor: "#153586",
+      fontsize: 18
     },
     textInput: {
         alignItems: 'center',

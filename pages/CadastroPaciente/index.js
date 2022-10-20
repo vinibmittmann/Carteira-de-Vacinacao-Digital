@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text,TextInput, Button, Touchable, TouchableOpacity } from 'react-native';
-import { styles } from './styles'
+import { styles } from '../../styles'
 
-export default function App() {
+
+export default function CadastroPacienteScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style >
