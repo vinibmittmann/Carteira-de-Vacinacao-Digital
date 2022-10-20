@@ -6,9 +6,9 @@ import { styles } from '../../styles'
 export default function CadastroPacienteScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style >
+      <TouchableOpacity>
         <Text style ={styles.title}>Novo Usuário</Text>
-      </View>
+      </TouchableOpacity>
 
         <TextInput
           style={styles.textInput}

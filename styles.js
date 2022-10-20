@@ -23,7 +23,10 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: "#153586",
-      fontsize: 18
+      borderRadius: 6,
+      textAlign: 'center',
+      fontFamily: "Inter-Bold",
+      color: "white"
     },
     textInput: {
         alignItems: 'center',
