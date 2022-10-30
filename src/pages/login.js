@@ -1,9 +1,29 @@
+import React, { useState } from 'react'
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles'
+import config from '../../config/config.json'
 
 
 export default function LoginScreen({ navigation })  {
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    async function SignIn() {
+        let request = await fetch(config.url + 'login', {
+            method: 'POST',
+            headers: {
+              'Accept':'application/json',
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password
+            })
+          })
+        console.log({email, password})
+    }
+    
     return (
         <View style = {styles.container}>
             
@@ -14,11 +34,13 @@ export default function LoginScreen({ navigation })  {
             <TextInput
             style = {styles.textInput}
             placeholder = "CPF / e-mail"
+            onChangeText = {(text)=>setEmail(text)}
             />
 
             <TextInput
             style = {styles.textInput}
             placeholder = "Senha"
+            onChangeText = {(text)=>setPassword(text)}
             />
 
             <TouchableOpacity
@@ -29,7 +51,7 @@ export default function LoginScreen({ navigation })  {
 
             <TouchableOpacity
             style = {styles.button}
-            
+            onPress = {SignIn}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
                 
