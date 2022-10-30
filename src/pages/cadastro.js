@@ -18,12 +18,11 @@ export default function CadastroPacienteScreen({ navigation }) {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
+        nameUser: name,
+        emailUser: email,
+        passwordUser: password
       })
     })
-    console.log({nome, email, senha})
   }
   
   return (
@@ -35,7 +34,7 @@ export default function CadastroPacienteScreen({ navigation }) {
         <TextInput
           style={styles.textInput}
           placeholder = "Nome"
-          onChangeText = {(text)=>setNome(text)}
+          onChangeText = {(text)=>setName(text)}
         />
 
         <TextInput
@@ -47,7 +46,7 @@ export default function CadastroPacienteScreen({ navigation }) {
         <TextInput
           style = {styles.textInput}
           placeholder = "Senha"
-          onChangeText = {(text)=>setSenha(text)}
+          onChangeText = {(text)=>setPassword(text)}
           secureTextEntry = {true}
         />        
 

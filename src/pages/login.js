@@ -17,11 +17,12 @@ export default function LoginScreen({ navigation })  {
               'Content-Type':'application/json'
             },
             body: JSON.stringify({
-              email: email,
-              password: password
+              emailUser: email,
+              passwordUser: password
             })
           })
-        console.log({email, password})
+        let res = await request.json();
+        console.log(res);
     }
     
     return (
