@@ -5,20 +5,20 @@ import { styles } from '../../styles'
 import config from '../../config/config.json'
 
 
-export default function LoginScreen({ navigation })  {
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+export default function WorkerLoginScreen({ navigation })  {
+    const [email, setEmailWorker] = useState(null);
+    const [password, setPasswordWorker] = useState(null);
 
-    async function SignIn() {
-        let request = await fetch(config.url + 'login', {
+    async function SignInWorker() {
+        let request = await fetch(config.url + 'loginWorker', {
             method: 'POST',
             headers: {
               'Accept':'application/json',
               'Content-Type':'application/json'
             },
             body: JSON.stringify({
-              emailUser: email,
-              passwordUser: password
+              emailWorker: email,
+              passwordWorker: password
             })
           })
         let res = await request.json();
@@ -35,27 +35,27 @@ export default function LoginScreen({ navigation })  {
             <TextInput
             style = {styles.textInput}
             placeholder = "CPF / e-mail"
-            onChangeText = {(text)=>setEmail(text)}
+            onChangeText = {(text)=>setEmailWorker(text)}
             />
 
             <TextInput
             style = {styles.textInput}
             placeholder = "Senha"
-            onChangeText = {(text)=>setPassword(text)}
+            secureTextEntry = {true}
+            onChangeText = {(text)=>setPasswordWorker(text)}
             />
 
             <TouchableOpacity
-            onPress = {() => navigation.navigate("SignUp")}
+            onPress = {null}
             >
-                <Text style={styles.link}>Esqueceu sua senha?</Text>
+                <Text style={[styles.link, {color:'#000000'}]}>Esqueceu sua senha?</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-            style = {styles.button}
-            onPress = {SignIn}
+            style = {[styles.button, {backgroundColor:'#000000'}]}
+            onPress = {SignInWorker}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
-                
             </TouchableOpacity>
         
         <StatusBar style="auto" />
