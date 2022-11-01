@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Worker extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
+  Worker.init({
     name: DataTypes.STRING,
     cpf: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -21,19 +21,19 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Worker',
   });
 
-  User.authenticate = async function(email, password) {
+  Worker.authenticate = async function(email, password) {
     try {
-      const user = await User.findOne({ where: { email } });
+      const worker = await Worker.findOne({ where: { email } });
 
-      if (user.password == password) return true;
+      if (worker.password == password) return true;
       return false
     } catch (TypeError) {
       return false;
     }
   }
 
-  return User;
+  return Worker;
 };

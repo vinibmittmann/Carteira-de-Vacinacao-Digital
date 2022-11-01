@@ -18,12 +18,33 @@ app.post('/login', async(req, res) => {
     return res.json(reqs)
 });
 
+app.post('/loginWorker', async(req, res) => {
+    console.log(req.body);
+    let reqs = await model.Worker.authenticate(req.body.emailWorker, req.body.passwordWorker)
+
+    return res.json(reqs)
+});
+
 
 app.post('/register', async(req, res) => {
     let reqs = await model.User.create({
         'name': req.body.nameUser,
+        'cpf': req.body.cpfUser,
         'email': req.body.emailUser,
         'password': req.body.passwordUser,
+        'birth': req.body.birthUser,
+        'createdAt': new Date(),
+        'updatedAt': new Date()
+    })
+});
+
+app.post('/registerWorker', async(req, res) => {
+    let reqs = await model.Worker.create({
+        'name': req.body.nameUser,
+        'cpf': req.body.cpfUser,
+        'email': req.body.emailUser,
+        'password': req.body.passwordUser,
+        'birth': req.body.birthUser,
         'createdAt': new Date(),
         'updatedAt': new Date()
     })
