@@ -1,35 +1,17 @@
-import React, { useState } from 'react'
+import React, {useState, useContext} from 'react'
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles'
-import config from '../../config/config.json'
+import {AuthContext} from '../contexts/auth'
 
 
 export default function LoginScreen({ navigation })  {
     const [email, setEmailUser] = useState(null);
     const [password, setPasswordUser] = useState(null);
-
-    async function SignInUser() {
-        let request = await fetch(config.url + 'login', {
-            method: 'POST',
-            headers: {
-              'Accept':'application/json',
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-              emailUser: email,
-              passwordUser: password
-            })
-          })
-        let res = await request.json();
-        console.log(res);
-    }
+    const {loginUser} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
-            <Text>
-                {password}, {email}
-            </Text>
             <Text style={styles.logo}>CARTEIRA</Text>
             <Text style={styles.logo}>DE VACINAÇÃO</Text>
             <Text style={[styles.logo, {paddingBottom: 115}]}>DIGITAL</Text>
@@ -55,7 +37,7 @@ export default function LoginScreen({ navigation })  {
 
             <TouchableOpacity
             style = {styles.button}
-            onPress = {SignInUser}
+            onPress = {() => loginUser(email, password)}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
             </TouchableOpacity>

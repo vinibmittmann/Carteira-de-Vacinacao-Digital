@@ -1,10 +1,11 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Routes from './src/routes/index'
 // import AppLoading from 'expo-app-loading'
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font'
+import {useFonts} from 'expo-font'
+import {AuthProvider} from './src/contexts/auth'
 
 const Stack = createNativeStackNavigator();
 
@@ -19,9 +20,11 @@ export default function App() {
   }else{
     SplashScreen.hideAsync();
     return (
-      <NavigationContainer>
-        <Routes/>
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+           <Routes/>
+        </NavigationContainer>
+      </AuthProvider>
     );
   }
 
