@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     buttonPaciente: {
       fontSize: 14,
       backgroundColor: "#153586",
-      width: 210,
+      width: 300,
       height: 40,
       borderRadius: 16,
       justifyContent: 'center',
@@ -65,5 +65,10 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         color: "#153586",
         paddingTop: 10
+    },
+    labelError:{
+        alignSelf: 'flex-start',
+        color: '#d40a00',
+        marginBottom: 8
     }
 });
