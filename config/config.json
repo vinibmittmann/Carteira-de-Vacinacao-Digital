@@ -1,24 +1,24 @@
 {
   "development": {
     "username": "postgres",
-    "password": "vini8316",
+    "password": "postgres",
     "database": "app",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "vini8316",
+    "password": "postgres",
     "database": "app",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "vini8316",
+    "password": "postgres",
     "database": "app",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "url": "http://192.168.0.102:3000/"
+  "url": "http://172.20.83.85:3000/"
 }
