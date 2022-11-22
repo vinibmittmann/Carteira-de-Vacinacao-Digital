@@ -8,11 +8,12 @@ import {AuthContext} from '../contexts/auth'
 export default function UserMainScreen({ navigation })  {
     const [email, setEmailUser] = useState(null);
     const [password, setPasswordUser] = useState(null);
-    const {logout} = useContext(AuthContext);
+    const {logout, username} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
 
+            <Text style={styles.logo}>{username}</Text>
             <TouchableOpacity
             style = {styles.button}
             onPress = {() => logout()}

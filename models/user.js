@@ -24,16 +24,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
 
-  User.authenticate = async function(email, password) {
-    try {
-      const user = await User.findOne({ where: { email } });
-
-      if (user.password == password) return true;
-      return false
-    } catch (TypeError) {
-      return false;
-    }
-  }
-
   return User;
 };

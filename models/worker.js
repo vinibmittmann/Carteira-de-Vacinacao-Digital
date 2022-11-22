@@ -28,8 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     try {
       const worker = await Worker.findOne({ where: { email } });
 
-      if (worker.password == password) return true;
-      return false
+      if (worker.password == password) return JSON.stringify({
+        name: worker.name,
+        email: worker.email
+      }); else return false;
     } catch (TypeError) {
       return false;
     }

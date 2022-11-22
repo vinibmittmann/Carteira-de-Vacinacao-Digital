@@ -12,10 +12,28 @@ app.use(bodyParser.json());
 
 
 app.post('/login', async(req, res) => {
+    const {emailUser, passwordUser } = req.body;
     console.log(req.body);
-    let reqs = await model.User.authenticate(req.body.emailUser, req.body.passwordUser)
+    //let reqs = await model.User.authenticate(req.body.emailUser, req.body.passwordUser)
+    
+    try {
+        const user = await model.User.findOne({ where: { email: emailUser } });
+        console.log(user);
+  
+        if (user.password == passwordUser) {
+          return res.json({
+            status: 1,
+            name: user.name,
+            email: user.email
+        })} else return res.json({
+          status: 0
+        })
+      } catch (TypeError) {
+        return res.json({
+          status: 0
+        })
+      }
 
-    return res.json(reqs)
 });
 
 app.post('/loginWorker', async(req, res) => {

@@ -1,10 +1,12 @@
 import React, {createContext, useState} from 'react'
 import config from '../../config/config.json'
 
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [userType, setUserType] = useState(null);
+    const [username, setUsername] = useState(null);
 
     const loginUser = async (email, password) => {
         let request = await fetch(config.url + 'login', {
@@ -19,9 +21,11 @@ export const AuthProvider = ({children}) => {
             })
           })
         let res = await request.json();
+        console.log(res);
 
-        if (res) {
-            setUserType('user');
+        if (res.status == 1) {
+          setUsername(res.name);
+          setUserType('user');
         }
     }
 
@@ -40,16 +44,18 @@ export const AuthProvider = ({children}) => {
         let res = await request.json();
 
         if (res) {
-            setUserType('worker');
+          setUsername(res.name);  
+          setUserType('worker');
         }
     }
 
     const logout = () => {
-        setUserType(null);
+      setUsername(null);
+      setUserType(null);
     }
 
     return (
-        <AuthContext.Provider value={{loginUser, loginWorker, logout, userType}}>
+        <AuthContext.Provider value={{loginUser, loginWorker, logout, userType, username}}>
             {children}
         </AuthContext.Provider>
     )
