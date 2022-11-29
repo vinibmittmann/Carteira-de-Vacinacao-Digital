@@ -3,12 +3,14 @@ import Login from '../pages/userLogin'
 import LoginWorker from '../pages/workerLogin'
 import CadastroPacienteScreen from '../pages/userSignUp';
 import CadastroProfissionalScreen from '../pages/workerSignUp';
+import Home from '../pages/Home';
 
 const AuthStack = createNativeStackNavigator();
 
 const AuthRoute: React.FC = () => (
     <AuthStack.Navigator>
         <AuthStack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <AuthStack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <AuthStack.Screen name="SignUp" component={CadastroPacienteScreen} options={{
             title: 'Novo Usuário',
             headerTitleAlign: 'center',

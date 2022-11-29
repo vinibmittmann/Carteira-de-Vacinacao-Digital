@@ -22,7 +22,13 @@ export default function LoginScreen({ navigation })  {
             })
           })
         let res = await request.json();
-        console.log(res);
+
+        if(res){
+            navigation.navigate("Home");
+        }else{
+            console.log(res);
+        }
+        
     }
     
     return (
