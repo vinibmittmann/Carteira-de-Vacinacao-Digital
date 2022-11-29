@@ -8,7 +8,7 @@ import {AuthContext} from '../contexts/auth'
 export default function LoginScreen({ navigation })  {
     const [email, setEmailUser] = useState(null);
     const [password, setPasswordUser] = useState(null);
-    const {loginUser} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation })  {
 
             <TouchableOpacity
             style = {styles.button}
-            onPress = {() => loginUser(email, password)}
+            onPress = {() => login(email, password)}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
             </TouchableOpacity>

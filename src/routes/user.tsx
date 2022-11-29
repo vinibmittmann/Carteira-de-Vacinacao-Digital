@@ -1,6 +1,6 @@
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import UserMainScreen from '../pages/userMain'
+import UserMainScreen from '../pages/main'
 
 //const UserStack = createDrawerNavigator();
 const UserStack = createNativeStackNavigator();

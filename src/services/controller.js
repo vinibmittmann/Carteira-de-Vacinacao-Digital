@@ -3,66 +3,79 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const model = require('../../models');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 let app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json());
 
 
-app.post('/login', async(req, res) => {
-    const {emailUser, passwordUser } = req.body;
-    console.log(req.body);
-    //let reqs = await model.User.authenticate(req.body.emailUser, req.body.passwordUser)
-    
+const verifyWorker = async (res, req, next) => {
     try {
-        const user = await model.User.findOne({ where: { email: emailUser } });
-        console.log(user);
+        jwt.verify(res.body.token, 'shhhhhh')
+        next()
+    } catch (error) {
+        return res.json({
+            status: 'invalid token'
+        })
+    }
+}
+
+
+app.post('/login', async(req, res) => {
+    const {email, password } = req.body;
+        
+    try {
+        const user = await model.User.findOne({ where: { email: email } });
   
-        if (user.password == passwordUser) {
+        if (bcrypt.compareSync(password, user.password)) {
           return res.json({
-            status: 1,
+            status: 'success',
             name: user.name,
-            email: user.email
+            email: user.email,
+            token: jwt.sign({id: user.id}, 'shhhh', { expiresIn: '2h' })
         })} else return res.json({
-          status: 0
+          status: 'fail'
         })
       } catch (TypeError) {
         return res.json({
-          status: 0
+          status: 'fail'
         })
       }
-
 });
 
 app.post('/loginWorker', async(req, res) => {
-    console.log(req.body);
-    let reqs = await model.Worker.authenticate(req.body.emailWorker, req.body.passwordWorker)
-
-    return res.json(reqs)
+    const {email, password } = req.body;
+        
+    try {
+        const worker = await model.Worker.findOne({ where: { email: email } });
+  
+        if (worker.password == password) {
+          return res.json({
+            status: 'success',
+            name: worker.name,
+            email: worker.email,
+            token: jwt.sign({id: worker.id}, 'shhhhhh', { expiresIn: '2h' })
+        })} else return res.json({
+          status: 'fail'
+        })
+      } catch (TypeError) {
+        return res.json({
+          status: 'fail'
+        })
+      }
 });
 
 
-app.post('/register', async(req, res) => {
+app.post('/register', verifyWorker, async(req, res) => {
     let reqs = await model.User.create({
-        'name': req.body.nameUser,
-        'cpf': req.body.cpfUser,
-        'email': req.body.emailUser,
-        'password': req.body.passwordUser,
-        'birth': req.body.birthUser,
-        'createdAt': new Date(),
-        'updatedAt': new Date()
-    })
-});
-
-app.post('/registerWorker', async(req, res) => {
-    let reqs = await model.Worker.create({
-        'name': req.body.nameUser,
-        'cpf': req.body.cpfUser,
-        'email': req.body.emailUser,
-        'password': req.body.passwordUser,
-        'birth': req.body.birthUser,
+        'name': req.body.name,
+        'cpf': req.body.cpf,
+        'email': req.body.email,
+        'password': bcrypt.hashSync(req.body.password, await bcrypt.genSalt(15)),
+        'birth': req.body.birth,
         'createdAt': new Date(),
         'updatedAt': new Date()
     })
@@ -83,4 +96,3 @@ let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {
     console.log('Running');
 })
-
