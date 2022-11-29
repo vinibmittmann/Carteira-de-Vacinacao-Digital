@@ -31,7 +31,7 @@ app.post('/login', async(req, res) => {
     try {
         const user = await model.User.findOne({ where: { email: email } });
   
-        if (user.password == password) {
+        if (bcrypt.compareSync(password, user.password)) {
           return res.json({
             status: 'success',
             name: user.name,
@@ -72,11 +72,11 @@ app.post('/loginWorker', async(req, res) => {
 
 app.post('/register', verifyWorker, async(req, res) => {
     let reqs = await model.User.create({
-        'name': req.body.nameUser,
-        'cpf': req.body.cpfUser,
-        'email': req.body.emailUser,
-        'password': req.body.passwordUser,
-        'birth': req.body.birthUser,
+        'name': req.body.name,
+        'cpf': req.body.cpf,
+        'email': req.body.email,
+        'password': bcrypt.hashSync(req.body.password, await bcrypt.genSalt(15)),
+        'birth': req.body.birth,
         'createdAt': new Date(),
         'updatedAt': new Date()
     })

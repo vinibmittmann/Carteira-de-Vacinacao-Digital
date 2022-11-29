@@ -35,11 +35,11 @@ export default function AddUserScreen({ navigation }) {
         },
         body: JSON.stringify({
           token: token,
-          nameUser: data.name,
-          cpfUser: data.cpf,
-          emailUser: data.email,
-          passwordUser: data.password,
-          birthUser: new Date(data.birth)
+          name: data.name,
+          cpf: data.cpf,
+          email: data.email,
+          password: data.password,
+          birth: new Date(data.birth)
         })
       })
     }

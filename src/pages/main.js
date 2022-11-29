@@ -14,6 +14,12 @@ export default function MainScreen({ navigation })  {
             
             <TouchableOpacity
             style = {[styles.button, {backgroundColor:'#000000'}]}
+            onPress = {() => navigation.navigate('addUser')}
+            >
+                <Text style={styles.buttonTitle}>SAIR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            style = {[styles.button, {backgroundColor:'#000000'}]}
             onPress = {() => logout()}
             >
                 <Text style={styles.buttonTitle}>SAIR</Text>
