@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const model = require('../../models');
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 let app = express();
 app.use(cors());
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const verifyWoker = async (res, req, next) => {
+const verifyWorker = async (res, req, next) => {
     try {
         jwt.verify(res.body.token, 'shhhhhh')
         next()

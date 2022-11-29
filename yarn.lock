@@ -2287,6 +2287,11 @@
     "@mapbox/node-pre-gyp" "^1.0.10"
     "node-addon-api" "^5.0.0"
 
+"bcryptjs@^2.4.3":
+  "integrity" "sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ=="
+  "resolved" "https://registry.npmjs.org/bcryptjs/-/bcryptjs-2.4.3.tgz"
+  "version" "2.4.3"
+
 "better-opn@~3.0.2":
   "integrity" "sha512-aVNobHnJqLiUelTaHat9DZ1qM2w0C0Eym4LPI/3JxOnSokGVdsl1T1kN7TFvsEAD8G47A6VKQ0TVHqbBnYMJlQ=="
   "resolved" "https://registry.npmjs.org/better-opn/-/better-opn-3.0.2.tgz"
@@ -6185,6 +6190,11 @@
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
+
+"react-native-bcrypt@^2.4.0":
+  "integrity" "sha512-nC8SR/YCCLIluxd1YEkUX2/xjKELLkO0pgIZc1JGUw9o+wnsfpujm0J8NSPmPEqFUe1n2EkysHnAmuKInDusoQ=="
+  "resolved" "https://registry.npmjs.org/react-native-bcrypt/-/react-native-bcrypt-2.4.0.tgz"
+  "version" "2.4.0"
 
 "react-native-codegen@^0.69.2":
   "integrity" "sha512-yPcgMHD4mqLbckqnWjFBaxomDnBREfRjDi2G/WxNyPBQLD+PXUEmZTkDx6QoOXN+Bl2SkpnNOSsLE2+/RUHoPw=="
