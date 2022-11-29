@@ -25,11 +25,6 @@ export default function UserSignUpScreen({ navigation }) {
 
   async function registerUser(data) {
     if (data.password == data.password2) {
-<<<<<<< HEAD
-
-      console.log(hash);
-=======
->>>>>>> 8e4b7443ef2bc9da1d24880febc62f3757caa86f
       let request = await fetch(config.url + 'register', {
         method: 'POST',
         headers: {
