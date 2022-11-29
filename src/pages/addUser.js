@@ -18,7 +18,7 @@ const schema = yup.object({
 
 })
 
-export default function UserSignUpScreen({ navigation }) {
+export default function AddUserScreen({ navigation }) {
   const {control, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema)
   })

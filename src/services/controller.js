@@ -12,35 +12,46 @@ app.use(bodyParser.json());
 
 
 app.post('/login', async(req, res) => {
-    const {emailUser, passwordUser } = req.body;
-    console.log(req.body);
-    //let reqs = await model.User.authenticate(req.body.emailUser, req.body.passwordUser)
-    
+    const {email, password } = req.body;
+        
     try {
-        const user = await model.User.findOne({ where: { email: emailUser } });
-        console.log(user);
+        const user = await model.User.findOne({ where: { email: email } });
   
-        if (user.password == passwordUser) {
+        if (user.password == password) {
           return res.json({
-            status: 1,
+            status: 'success',
             name: user.name,
             email: user.email
         })} else return res.json({
-          status: 0
+          status: 'fail'
         })
       } catch (TypeError) {
         return res.json({
-          status: 0
+          status: 'fail'
         })
       }
-
 });
 
 app.post('/loginWorker', async(req, res) => {
-    console.log(req.body);
-    let reqs = await model.Worker.authenticate(req.body.emailWorker, req.body.passwordWorker)
-
-    return res.json(reqs)
+    const {email, password } = req.body;
+        
+    try {
+        const worker = await model.Worker.findOne({ where: { email: email } });
+        console.log(worker);
+  
+        if (worker.password == password) {
+          return res.json({
+            status: 'success',
+            name: worker.name,
+            email: worker.email
+        })} else return res.json({
+          status: 'fail'
+        })
+      } catch (TypeError) {
+        return res.json({
+          status: 'fail'
+        })
+      }
 });
 
 

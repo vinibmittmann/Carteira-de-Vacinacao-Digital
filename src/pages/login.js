@@ -5,10 +5,10 @@ import { styles } from '../../styles'
 import {AuthContext} from '../contexts/auth'
 
 
-export default function WorkerLoginScreen({ navigation })  {
+export default function LoginScreen({ navigation })  {
     const [email, setEmailWorker] = useState(null);
     const [password, setPasswordWorker] = useState(null);
-    const {loginWorker} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
@@ -37,7 +37,7 @@ export default function WorkerLoginScreen({ navigation })  {
 
             <TouchableOpacity
             style = {[styles.button, {backgroundColor:'#000000'}]}
-            onPress = {() => loginWorker(email, password)}
+            onPress = {() => login(email, password)}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
             </TouchableOpacity>

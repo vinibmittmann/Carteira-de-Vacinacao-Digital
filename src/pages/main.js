@@ -5,17 +5,16 @@ import { styles } from '../../styles'
 import {AuthContext} from '../contexts/auth'
 
 
-export default function UserMainScreen({ navigation })  {
+export default function MainScreen({ navigation })  {
     const [email, setEmailUser] = useState(null);
     const [password, setPasswordUser] = useState(null);
     const {logout, username} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
-
-            <Text style={styles.logo}>{username}</Text>
+            
             <TouchableOpacity
-            style = {styles.button}
+            style = {[styles.button, {backgroundColor:'#000000'}]}
             onPress = {() => logout()}
             >
                 <Text style={styles.buttonTitle}>SAIR</Text>
