@@ -69,6 +69,16 @@ app.post('/registerWorker', async(req, res) => {
 });
 
 
+app.post('/registerVacinas', async(req, res) => {
+    let reqs = await model.Vacinas.create({
+        'name': req.body.nameVacinas,
+        'producer': req.body.producer,
+        'dosage': req.body.dosage,
+        'createdAt': new Date(),
+        'updatedAt': new Date()
+    })
+});
+
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {
     console.log('Running');

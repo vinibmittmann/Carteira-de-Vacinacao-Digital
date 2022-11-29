@@ -21,4 +21,8 @@
     "dialect": "postgres"
   },
   "url": "http://172.20.83.85:3000/"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8e4b7443ef2bc9da1d24880febc62f3757caa86f
