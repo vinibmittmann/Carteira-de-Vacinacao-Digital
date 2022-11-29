@@ -6,9 +6,8 @@ import {AuthContext} from '../contexts/auth'
 
 
 export default function MainScreen({ navigation })  {
-    const [email, setEmailUser] = useState(null);
-    const [password, setPasswordUser] = useState(null);
-    const {logout, username} = useContext(AuthContext);
+    const {logout, token} = useContext(AuthContext);
+    console.log(token)
     
     return (
         <View style = {styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { View, Text,TextInput, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import { styles } from '../../styles'
 import config from '../../config/config.json'
+import {AuthContext} from '../contexts/auth'
 
 const schema = yup.object({
   name: yup.string().required("Informe seu nome"),
@@ -22,6 +23,7 @@ export default function AddUserScreen({ navigation }) {
   const {control, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema)
   })
+  const {token} = useContext(AuthContext)
 
   async function registerUser(data) {
     if (data.password == data.password2) {
@@ -32,6 +34,7 @@ export default function AddUserScreen({ navigation }) {
           'Content-Type':'application/json'
         },
         body: JSON.stringify({
+          token: token,
           nameUser: data.name,
           cpfUser: data.cpf,
           emailUser: data.email,

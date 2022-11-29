@@ -3,12 +3,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const model = require('../../models');
+const jwt = require('jsonwebtoken')
 
 let app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
+
+
+const verifyWoker = async (res, req, next) => {
+    try {
+        jwt.verify(res.body.token, 'shhhhhh')
+        next()
+    } catch (error) {
+        return res.json({
+            status: 'invalid token'
+        })
+    }
+}
 
 
 app.post('/login', async(req, res) => {
@@ -21,7 +34,8 @@ app.post('/login', async(req, res) => {
           return res.json({
             status: 'success',
             name: user.name,
-            email: user.email
+            email: user.email,
+            token: jwt.sign({id: user.id}, 'shhhh', { expiresIn: '2h' })
         })} else return res.json({
           status: 'fail'
         })
@@ -37,13 +51,13 @@ app.post('/loginWorker', async(req, res) => {
         
     try {
         const worker = await model.Worker.findOne({ where: { email: email } });
-        console.log(worker);
   
         if (worker.password == password) {
           return res.json({
             status: 'success',
             name: worker.name,
-            email: worker.email
+            email: worker.email,
+            token: jwt.sign({id: worker.id}, 'shhhhhh', { expiresIn: '2h' })
         })} else return res.json({
           status: 'fail'
         })
@@ -55,20 +69,8 @@ app.post('/loginWorker', async(req, res) => {
 });
 
 
-app.post('/register', async(req, res) => {
+app.post('/register', verifyWorker, async(req, res) => {
     let reqs = await model.User.create({
-        'name': req.body.nameUser,
-        'cpf': req.body.cpfUser,
-        'email': req.body.emailUser,
-        'password': req.body.passwordUser,
-        'birth': req.body.birthUser,
-        'createdAt': new Date(),
-        'updatedAt': new Date()
-    })
-});
-
-app.post('/registerWorker', async(req, res) => {
-    let reqs = await model.Worker.create({
         'name': req.body.nameUser,
         'cpf': req.body.cpfUser,
         'email': req.body.emailUser,
@@ -94,4 +96,3 @@ let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {
     console.log('Running');
 })
-
