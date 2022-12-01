@@ -8,14 +8,15 @@ import {AuthContext} from '../contexts/auth'
 export default function LoginScreen({ navigation })  {
     const [email, setEmailUser] = useState(null);
     const [password, setPasswordUser] = useState(null);
-    const {login} = useContext(AuthContext);
+    const {login, error} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
             <Text style={styles.logo}>CARTEIRA</Text>
             <Text style={styles.logo}>DE VACINAÇÃO</Text>
-            <Text style={[styles.logo, {paddingBottom: 115}]}>DIGITAL</Text>
+            <Text style={[styles.logo, {paddingBottom: 100}]}>DIGITAL</Text>
             
+            <Text style={styles.error}> {error} </Text>
             <TextInput
             style = {styles.textInput}
             placeholder = "CPF / e-mail"
@@ -40,24 +41,6 @@ export default function LoginScreen({ navigation })  {
             onPress = {() => login(email, password)}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-            onPress = {() => navigation.navigate("LoginWorker")}
-            >
-                <Text >Login Profissional</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-            onPress = {() => navigation.navigate("SignUp")}
-            >
-                <Text >Adicionar Usuário</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-            onPress = {() => navigation.navigate("SignUpWorker")}
-            >
-                <Text >Adicionar Profissional</Text>
             </TouchableOpacity>
         
         <StatusBar style="auto" />

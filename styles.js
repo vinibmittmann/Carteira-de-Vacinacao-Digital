@@ -66,9 +66,13 @@ export const styles = StyleSheet.create({
         color: "#153586",
         paddingTop: 10
     },
-    labelError:{
+    labelError: {
         alignSelf: 'flex-start',
         color: '#d40a00',
         marginBottom: 8
+    },
+    error: {
+        color: '#d30000',
+        paddingBottom: 5
     }
 });
