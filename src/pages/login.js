@@ -5,10 +5,10 @@ import { styles } from '../../styles'
 import {AuthContext} from '../contexts/auth'
 
 
-export default function LoginScreen({ navigation })  {
+export default function LoginScreen()  {
     const [email, setEmailWorker] = useState(null);
     const [password, setPasswordWorker] = useState(null);
-    const {login} = useContext(AuthContext);
+    const {login, error} = useContext(AuthContext);
     
     return (
         <View style = {styles.container}>
@@ -16,6 +16,7 @@ export default function LoginScreen({ navigation })  {
             <Text style={styles.logo}>DE VACINAÇÃO</Text>
             <Text style={[styles.logo, {paddingBottom: 115}]}>DIGITAL</Text>
             
+            <Text style={styles.error}> {error} </Text>
             <TextInput
             style = {styles.textInput}
             placeholder = "CPF / e-mail"

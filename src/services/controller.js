@@ -9,7 +9,6 @@ const bcrypt = require('bcryptjs')
 let app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json());
 
 
@@ -38,11 +37,13 @@ app.post('/login', async(req, res) => {
             email: user.email,
             token: jwt.sign({id: user.id}, 'shhhh', { expiresIn: '2h' })
         })} else return res.json({
-          status: 'fail'
+            status: 'fail',
+            message: 'Credenciais inválidas!'
         })
       } catch (TypeError) {
         return res.json({
-          status: 'fail'
+            status: 'fail',
+            message: 'Credenciais inválidas!'
         })
       }
 });
@@ -53,18 +54,20 @@ app.post('/loginWorker', async(req, res) => {
     try {
         const worker = await model.Worker.findOne({ where: { email: email } });
   
-        if (worker.password == password) {
+        if (worker.password === password) {
           return res.json({
             status: 'success',
             name: worker.name,
             email: worker.email,
             token: jwt.sign({id: worker.id}, 'shhhhhh', { expiresIn: '2h' })
         })} else return res.json({
-          status: 'fail'
+            status: 'fail',
+            message: 'Credenciais inválidas!'
         })
       } catch (TypeError) {
         return res.json({
-          status: 'fail'
+            status: 'fail',
+            message: 'Credenciais inválidas!'
         })
       }
 });
