@@ -15,8 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Vacinas.init({
     name: DataTypes.STRING,
-    producer: DataTypes.STRING,
-    dosage: DataTypes.INTEGER
+    manufacturer: DataTypes.STRING,
+    dosage: DataTypes.INTEGER,
+    frequency: DataTypes.TIME
   }, {
     sequelize,
     modelName: 'Vacinas',

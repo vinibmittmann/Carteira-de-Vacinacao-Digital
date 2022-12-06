@@ -12,11 +12,14 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      producer: {
+      manufacturer: {
         type: Sequelize.STRING
       },
       dosage: {
         type: Sequelize.INTEGER
+      },
+      frequency: {
+        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,
