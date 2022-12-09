@@ -52,7 +52,7 @@ app.post('/loginWorker', async(req, res) => {
     const {email, password } = req.body;
         
     try {
-        const worker = await model.Worker.findOne({ where: { email: email } });
+        const worker = await model.Worker.findOne({ where: { email: email } })
   
         if (worker.password === password) {
           return res.json({
@@ -95,9 +95,35 @@ app.post('/registerVacinas', async(req, res) => {
 });
 
 app.post('/getVaccines', verifyWorker, async(req, res) => {
-    let reqs = await model.Vacinas.findAll({where: {name: {[Op.iLike]: req.body.name}}})
+    let reqs = await model.Vacinas.findAll()
+    let data = []
+    for (let i=0; i < Object.values(reqs).length; i++) {
+        data.push({'label': reqs[i].name, 'value': reqs[i].id})
+    }
+    return res.json(data)
+})
+
+app.post('/getVaccine', verifyWorker, async(req, res) => {
+    let reqs = await model.Vacinas.findOne({ where: { id: req.body.id } })
     return res.json(reqs)
 })
+
+app.post('/getUserByCPF', verifyWorker, async(req, res) => {
+    try{
+        let reqs = await model.User.findOne({ where: { cpf: req.body.cpf}})
+        return res.json({
+            status: 'success',
+            id: reqs.id,
+            name: reqs.name
+        })
+    } catch (TypeError) {
+        return res.json({
+            status: 'fail',
+            message: 'CPF inválido'
+        })
+    }
+})
+
 
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {
