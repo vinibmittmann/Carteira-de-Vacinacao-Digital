@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import config from '../../config/config.json'
 
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
     const [logged, setLogged] = useState(null)
@@ -31,10 +31,7 @@ export const AuthProvider = ({children}) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+            body: JSON.stringify({email: email, password: password})
         })
         let res = await request.json();
 

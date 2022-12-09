@@ -5,6 +5,7 @@ const cors = require('cors');
 const model = require('../../models');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const { Op } = require("sequelize");
 
 let app = express();
 app.use(cors());
@@ -22,7 +23,6 @@ const verifyWorker = async (res, req, next) => {
         })
     }
 }
-
 
 app.post('/login', async(req, res) => {
     const {email, password } = req.body;
@@ -72,7 +72,6 @@ app.post('/loginWorker', async(req, res) => {
       }
 });
 
-
 app.post('/register', verifyWorker, async(req, res) => {
     let reqs = await model.User.create({
         'name': req.body.name,
@@ -85,7 +84,6 @@ app.post('/register', verifyWorker, async(req, res) => {
     })
 });
 
-
 app.post('/registerVacinas', async(req, res) => {
     let reqs = await model.Vacinas.create({
         'name': req.body.nameVacinas,
@@ -95,6 +93,11 @@ app.post('/registerVacinas', async(req, res) => {
         'updatedAt': new Date()
     })
 });
+
+app.post('/getVaccines', verifyWorker, async(req, res) => {
+    let reqs = await model.Vacinas.findAll({where: {name: {[Op.iLike]: req.body.name}}})
+    return res.json(reqs)
+})
 
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {

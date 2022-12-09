@@ -26,7 +26,7 @@ export default function AddUserScreen({ navigation }) {
   const {token} = useContext(AuthContext)
 
   async function registerUser(data) {
-    if (data.password == data.password2) {
+    if (data.password === data.password2) {
       let request = await fetch(config.url + 'register', {
         method: 'POST',
         headers: {
