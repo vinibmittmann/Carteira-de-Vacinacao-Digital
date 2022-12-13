@@ -2,10 +2,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const model = require('../../models');
+const model = require('../../models')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const { Op } = require("sequelize");
 
 let app = express();
 app.use(cors());
@@ -13,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const verifyWorker = async (res, req, next) => {
+const verifyWorker = async (req, res, next) => {
     try {
-        jwt.verify(res.body.token, 'shhhhhh')
+        jwt.verify(req.body.token, 'shhhhhh')
         next()
     } catch (error) {
         return res.json({
@@ -124,6 +123,15 @@ app.post('/getUserByCPF', verifyWorker, async(req, res) => {
     }
 })
 
+app.post('/applyVaccine', verifyWorker, async(req, res) => {
+    let reqs = await model.Historico.create({
+        'user': req.body.userID,
+        'vacina': req.body.vaccineID,
+        'createdAt': new Date(),
+        'updatedAt': new Date()
+    })
+    return res
+})
 
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {

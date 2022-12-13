@@ -55,6 +55,14 @@ export default function LoginScreen() {
         }
     }
 
+    const applyVaccine = async() => {
+        let request = await fetch(config.url + 'applyVaccine', {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify({token: token, userID: user.id, vaccineID: vaccine.id})
+        })
+    }
+
     return (
         <View style={styles.container}>
 
@@ -86,7 +94,7 @@ export default function LoginScreen() {
 
             <TouchableOpacity
                 style={[styles.button, {backgroundColor: '#000000'}]}
-                onPress={() => null}
+                onPress={() => applyVaccine()}
             >
                 <Text style={styles.buttonTitle}>CONFIRMAR</Text>
             </TouchableOpacity>
