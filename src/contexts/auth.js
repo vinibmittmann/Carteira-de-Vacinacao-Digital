@@ -25,7 +25,7 @@ export const AuthProvider = ({children}) => {
     })
 
     const login = async (email, password) => {
-        let request = await fetch(config.url + 'loginWorker', {
+        let request = await fetch(config.url + 'login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

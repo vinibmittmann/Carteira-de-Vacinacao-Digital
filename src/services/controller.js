@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const model = require('../../models')
+const model = require('../../models');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const verifyWorker = async (req, res, next) => {
+const verifyWorker = async (res, req, next) => {
     try {
-        jwt.verify(req.body.token, 'shhhhhh')
+        jwt.verify(res.body.token, 'shhhhhh')
         next()
     } catch (error) {
         return res.json({
@@ -22,6 +22,7 @@ const verifyWorker = async (req, res, next) => {
         })
     }
 }
+
 
 app.post('/login', async(req, res) => {
     const {email, password } = req.body;
@@ -36,42 +37,17 @@ app.post('/login', async(req, res) => {
             email: user.email,
             token: jwt.sign({id: user.id}, 'shhhh', { expiresIn: '2h' })
         })} else return res.json({
-            status: 'fail',
-            message: 'Credenciais inválidas!'
+          status: 'fail'
         })
       } catch (TypeError) {
         return res.json({
-            status: 'fail',
-            message: 'Credenciais inválidas!'
+          status: 'fail'
         })
       }
 });
 
-app.post('/loginWorker', async(req, res) => {
-    const {email, password } = req.body;
-        
-    try {
-        const worker = await model.Worker.findOne({ where: { email: email } })
-  
-        if (worker.password === password) {
-          return res.json({
-            status: 'success',
-            name: worker.name,
-            email: worker.email,
-            token: jwt.sign({id: worker.id}, 'shhhhhh', { expiresIn: '2h' })
-        })} else return res.json({
-            status: 'fail',
-            message: 'Credenciais inválidas!'
-        })
-      } catch (TypeError) {
-        return res.json({
-            status: 'fail',
-            message: 'Credenciais inválidas!'
-        })
-      }
-});
 
-app.post('/register', verifyWorker, async(req, res) => {
+app.post('/register', async(req, res) => {
     let reqs = await model.User.create({
         'name': req.body.name,
         'cpf': req.body.cpf,
@@ -83,6 +59,7 @@ app.post('/register', verifyWorker, async(req, res) => {
     })
 });
 
+
 app.post('/registerVacinas', async(req, res) => {
     let reqs = await model.Vacinas.create({
         'name': req.body.nameVacinas,
@@ -92,46 +69,6 @@ app.post('/registerVacinas', async(req, res) => {
         'updatedAt': new Date()
     })
 });
-
-app.post('/getVaccines', verifyWorker, async(req, res) => {
-    let reqs = await model.Vacinas.findAll()
-    let data = []
-    for (let i=0; i < Object.values(reqs).length; i++) {
-        data.push({'label': reqs[i].name, 'value': reqs[i].id})
-    }
-    return res.json(data)
-})
-
-app.post('/getVaccine', verifyWorker, async(req, res) => {
-    let reqs = await model.Vacinas.findOne({ where: { id: req.body.id } })
-    return res.json(reqs)
-})
-
-app.post('/getUserByCPF', verifyWorker, async(req, res) => {
-    try{
-        let reqs = await model.User.findOne({ where: { cpf: req.body.cpf}})
-        return res.json({
-            status: 'success',
-            id: reqs.id,
-            name: reqs.name
-        })
-    } catch (TypeError) {
-        return res.json({
-            status: 'fail',
-            message: 'CPF inválido'
-        })
-    }
-})
-
-app.post('/applyVaccine', verifyWorker, async(req, res) => {
-    let reqs = await model.Historico.create({
-        'user': req.body.userID,
-        'vacina': req.body.vaccineID,
-        'createdAt': new Date(),
-        'updatedAt': new Date()
-    })
-    return res
-})
 
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {

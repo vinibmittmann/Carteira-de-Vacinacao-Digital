@@ -5,9 +5,9 @@ import {styles} from '../../styles'
 import {AuthContext} from '../contexts/auth'
 
 
-export default function VaccineScreen() {
-    const [email, setEmailWorker] = useState(null);
-    const [password, setPasswordWorker] = useState(null);
+export default function LoginScreen({navigation}) {
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
     const {login, error} = useContext(AuthContext);
 
     return (
@@ -20,14 +20,14 @@ export default function VaccineScreen() {
             <TextInput
                 style={styles.textInput}
                 placeholder="CPF / e-mail"
-                onChangeText={(text) => setEmailWorker(text)}
+                onChangeText={(text) => setEmail(text)}
             />
 
             <TextInput
                 style={styles.textInput}
                 placeholder="Senha"
                 secureTextEntry={true}
-                onChangeText={(text) => setPasswordWorker(text)}
+                onChangeText={(text) => setPassword(text)}
             />
 
             <TouchableOpacity
@@ -42,6 +42,15 @@ export default function VaccineScreen() {
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>
             </TouchableOpacity>
+
+
+            <TouchableOpacity
+            onPress = {() => navigation.navigate("addUser")}
+            >
+                <Text >Adicionar Usuário</Text>
+            </TouchableOpacity>
+
+           
 
             <StatusBar style="auto"/>
         </View>

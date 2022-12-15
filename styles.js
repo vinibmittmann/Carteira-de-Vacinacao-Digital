@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
     },
     buttonPaciente: {
       fontSize: 14,
@@ -74,5 +73,54 @@ export const styles = StyleSheet.create({
     error: {
         color: '#d30000',
         paddingBottom: 5
-    }
+    },
+
+
+
+    card:{
+        width: 350,
+        height: 130,
+        borderColor: '#7A6DCC',
+        borderWidth: 1,
+        marginBottom: 10,
+
+        borderRadius: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding:10,
+        justifyContent: 'space-around',
+
+      
+    },
+
+    cardTitle:{
+        fontWeight: '700',
+        fontSize: 22,
+        lineHeight: 75,
+        alignContent: 'flex-start',
+        color: "#7A6DCC",
+        textTransform: 'uppercase'
+    },
+    cardContent:{
+        alignItems: 'flex-end',
+        color: "#7A6DCC",
+    },
+    textContent:{
+        color: "#7A6DCC",
+    },
+
+
+    shadow: {
+        shadowColor: '#171717',
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        shadowOffset: {width: 0, height: 0},
+        elevation:0,
+      },
+
+
+
+
+
+
 });
