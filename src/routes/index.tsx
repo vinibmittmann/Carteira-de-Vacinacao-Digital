@@ -4,7 +4,7 @@ import WorkerRoute from './worker'
 import {AuthContext} from '../contexts/auth'
 
 const Routes: React.FC = () => {
-    const logged = useContext(AuthContext);
+    const {logged} = useContext(AuthContext);
 
     if (logged) {
         return <WorkerRoute/>

@@ -41,7 +41,8 @@ app.post('/login', async(req, res) => {
         })
       } catch (TypeError) {
         return res.json({
-          status: 'fail'
+          status: 'fail',
+            message: 'Credenciais inválidas!'
         })
       }
 });

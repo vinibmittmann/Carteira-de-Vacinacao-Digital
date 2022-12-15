@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
             },
             body: JSON.stringify({email: email, password: password})
         })
-        let res = await request.json();
+        let res = await request.json()
 
         if (res.status === 'success') {
             setError(null)
@@ -52,7 +52,7 @@ export const AuthProvider = ({children}) => {
         await AsyncStorage.removeItem('USERNAME')
         await AsyncStorage.removeItem('LOGGED')
         await AsyncStorage.removeItem('TOKEN')
-        setToken(null);
+        setToken(null)
         setUsername(null)
         setLogged(null)
     }
