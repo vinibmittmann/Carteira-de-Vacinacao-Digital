@@ -94,6 +94,15 @@ app.post('/getUserByCPF', verifyEmployee, async(req, res) => {
     }
 })
 
+app.post('/applyVaccine', verifyEmployee, async(req, res) => {
+    let reqs = await model.Historico.create({
+        'user': req.body.userID,
+        'vacina': req.body.vaccineID,
+        'createdAt': new Date(),
+        'updatedAt': new Date()
+    })
+    return res
+})
 
 let port = process.env.PORT || 3000
 app.listen(port, (req, res) => {
