@@ -12,8 +12,6 @@ export default function MainScreen({ navigation })  {
     const [visible, setVisible] = React.useState(false);
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
-
-
     
     return (
         <SafeAreaView>
@@ -62,15 +60,6 @@ export default function MainScreen({ navigation })  {
                         </View>        
                     </View>
                     
-
-
-                    
-                    <TouchableOpacity
-                        style = {[styles.button, {backgroundColor:'#000000'}]}
-                    onPress = {() => navigation.navigate('addUser')}
-                    >
-                        <Text style={styles.buttonTitle}>SAIR</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity
                         style = {[styles.button, {backgroundColor:'#000000'}]}
                     onPress = {() => logout()}

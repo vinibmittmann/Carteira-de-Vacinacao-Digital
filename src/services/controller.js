@@ -1,52 +1,52 @@
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const model = require('../../models');
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const model = require('../../models')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-let app = express();
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+let app = express()
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 
-const verifyWorker = async (res, req, next) => {
+const verifyEmployee = async(req, res, next) => {
     try {
-        jwt.verify(res.body.token, 'shhhhhh')
-        next()
+        let token = jwt.verify(req.body.token, 'shhhhhh')
+        if (token) next()
     } catch (error) {
-        return res.json({
-            status: 'invalid token'
-        })
+        return false
     }
 }
 
+const verifyUser = async(req, res, next) => {
+    try {
+        let token = jwt.verify(req.body.token, 'shhhh')
+        if (token) next()
+    } catch (error) {
+        return false
+    }
+}
 
 app.post('/login', async(req, res) => {
-    const {email, password } = req.body;
-        
     try {
-        const user = await model.User.findOne({ where: { email: email } });
-  
-        if (bcrypt.compareSync(password, user.password)) {
+        const user = await model.User.findOne({ where: { email: req.body.email } })
+        const secret = user.type === 0 ? 'shhhh' : 'shhhhhh'
+
+        if (bcrypt.compareSync(req.body.password, user.password)) {
           return res.json({
             status: 'success',
             name: user.name,
             email: user.email,
-            token: jwt.sign({id: user.id}, 'shhhh', { expiresIn: '2h' })
-        })} else return res.json({
-          status: 'fail'
-        })
+              token: jwt.sign({id: user.id}, secret, { expiresIn: '2h' }),
+              type: user.type.toString()
+          })
+        } else return res.json({status: 'fail', message: 'Credenciais inválidas!'})
       } catch (TypeError) {
-        return res.json({
-          status: 'fail',
-            message: 'Credenciais inválidas!'
-        })
+        return res.json({status: 'fail', message: 'Credenciais inválidas!'})
       }
-});
-
+})
 
 app.post('/register', async(req, res) => {
     let reqs = await model.User.create({
@@ -56,22 +56,46 @@ app.post('/register', async(req, res) => {
         'password': bcrypt.hashSync(req.body.password, await bcrypt.genSalt(15)),
         'birth': req.body.birth,
         'createdAt': new Date(),
-        'updatedAt': new Date()
+        'updatedAt': new Date(),
+        'type': 0
     })
-});
-
+})
 
 app.post('/registerVacinas', async(req, res) => {
     let reqs = await model.Vacinas.create({
-        'name': req.body.nameVacinas,
+        'name': req.body.name,
         'producer': req.body.producer,
         'dosage': req.body.dosage,
         'createdAt': new Date(),
         'updatedAt': new Date()
     })
-});
+})
 
-let port = process.env.PORT || 3000;
+app.post('/getVaccines', verifyEmployee, async(req, res) => {
+    let reqs = await model.Vacinas.findAll()
+    let data = []
+    for (let i=0; i < Object.values(reqs).length; i++) {
+        data.push({'label': reqs[i].name, 'value': reqs[i].id})
+    }
+    return res.json(data)
+})
+
+app.post('/getVaccine', verifyEmployee, async(req, res) => {
+    let reqs = await model.Vacinas.findOne({ where: { id: req.body.id } })
+    return res.json(reqs)
+})
+
+app.post('/getUserByCPF', verifyEmployee, async(req, res) => {
+    try {
+        let reqs = await model.User.findOne({ where: { cpf: req.body.cpf}})
+        return res.json({status: 'success', id: reqs.id, name: reqs.name})
+    } catch (TypeError) {
+        return res.json({status: 'fail', message: 'CPF inválido'})
+    }
+})
+
+
+let port = process.env.PORT || 3000
 app.listen(port, (req, res) => {
-    console.log('Running');
+    console.log('Running')
 })

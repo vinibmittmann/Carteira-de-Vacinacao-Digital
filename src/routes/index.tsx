@@ -1,17 +1,19 @@
 import React, {useContext} from 'react'
 import AuthRoute from './auth'
-import WorkerRoute from './worker'
+import EmployeeRoute from './employee'
+import UserRoute from './user'
 import {AuthContext} from '../contexts/auth'
 
 const Routes: React.FC = () => {
-    const {logged} = useContext(AuthContext);
+    // @ts-ignore
+    const {type} = useContext(AuthContext)
 
-    if (logged) {
-        return <WorkerRoute/>
+    if (type === '1') {
+        return <EmployeeRoute/>
+    } else if (type === '0') {
+        return <UserRoute/>
     }
-
     return <AuthRoute/>
-    
-};
+}
 
-export default Routes;
+export default Routes
