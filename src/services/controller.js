@@ -71,11 +71,23 @@ app.post('/registerVacinas', async(req, res) => {
     })
 })
 
+app.post('/getHistorico', verifyUser, async(req, res) => {
+    let reqs = await model.Historico.findAll()
+    let data = []
+    for (let i=0; i < Object.values(reqs).length; i++) {
+        data.push({'vacina': reqs[i].vacina, 'user': reqs[i].user , 'createdAt': reqs[i].createdAt})
+    }
+    console.log(data)
+    return res.json(data)
+})
+
+
+
 app.post('/getVaccines', verifyEmployee, async(req, res) => {
     let reqs = await model.Vacinas.findAll()
     let data = []
     for (let i=0; i < Object.values(reqs).length; i++) {
-        data.push({'label': reqs[i].name, 'value': reqs[i].id})
+        data.push({'label': reqs[i].vacina, 'value': reqs[i].id})
     }
     return res.json(data)
 })

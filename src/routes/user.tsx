@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import MainScreen from '../pages/main'
+import Home from '../pages/Home'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import {AuthContext} from '../contexts/auth'
 
@@ -18,9 +18,11 @@ function CustomDrawerContent(props) {
 
 const UserRoute: React.FC = () => (
     <UserStack.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-        <UserStack.Screen name="Carteira de Vacinação" component={MainScreen} options={{
+        <UserStack.Screen 
+            name="Carteira de Vacinação" 
+            component={Home} 
+            options={{
             headerShown: true
-
         }}/>
     </UserStack.Navigator>
 )

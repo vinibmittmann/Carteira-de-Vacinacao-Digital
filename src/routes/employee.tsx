@@ -1,5 +1,5 @@
-import React, {useContext} from 'react'
-import MainScreen from '../pages/main'
+import React, {useContext, Component} from 'react'
+import Home from '../pages/Home'
 import AddUserScreen from '../pages/addUser'
 import VaccinateScreen from '../pages/vaccinate'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
@@ -11,16 +11,16 @@ function CustomDrawerContent(props) {
     // @ts-ignore
     const {logout} = useContext(AuthContext)
     return (
-            <DrawerContentScrollView {...props}>
-                <DrawerItemList {...props} />
-                <DrawerItem label="Sair" onPress={() => logout()} />
-            </DrawerContentScrollView>
+        <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+            <DrawerItem label="Sair" onPress={() => logout()} />
+        </DrawerContentScrollView>
     )
 }
 
 const EmployeeRoute: React.FC = () => (
     <EmployeeStack.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-        <EmployeeStack.Screen name="Carteira de Vacinação" component={MainScreen} options={{
+        <EmployeeStack.Screen name="Carteira de Vacinação" component={Home} options={{
             headerShown: true
 
         }}/>
