@@ -40,7 +40,8 @@ app.post('/login', async(req, res) => {
             name: user.name,
             email: user.email,
               token: jwt.sign({id: user.id}, secret, { expiresIn: '2h' }),
-              type: user.type.toString()
+              type: user.type.toString(),
+              ID: user.id.toString()
           })
         } else return res.json({status: 'fail', message: 'Credenciais inválidas!'})
       } catch (TypeError) {
@@ -103,6 +104,21 @@ app.post('/applyVaccine', verifyEmployee, async(req, res) => {
     })
     return res
 })
+
+app.post('/getVaccinesByUser', async(req, res) => {
+    let reqs = await model.Historico.findAll()
+    let data = []
+    let j = 0;
+    for (let i=0; i < Object.values(reqs).length; i++) {
+        if (reqs[i].user == req.body.user) {
+            let vaccine = await model.Vacinas.findOne({ where: { id: reqs[i].vacina }})
+            data.push({'id': j, 'vaccine': vaccine.name, 'date': reqs[i].createdAt})
+            j++
+        }
+    }
+    return res.json(data)
+})
+
 
 let port = process.env.PORT || 3000
 app.listen(port, (req, res) => {

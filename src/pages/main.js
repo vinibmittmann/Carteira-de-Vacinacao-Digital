@@ -1,71 +1,44 @@
-import React, {useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { View, TouchableOpacity, Text, SafeAreaView, ScrollView} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles'
 import {AuthContext} from '../contexts/auth'
-import { Button, Menu, Divider, Provider } from 'react-native-paper';
+import config from '../../config/config.json'
 
 
-export default function MainScreen({ navigation })  {
-    const {logout} = useContext(AuthContext);
+export default function MainScreen()  {
+    const {token, ID} = useContext(AuthContext);
+    const [vaccines, setVaccines] = useState([])
 
-    const [visible, setVisible] = React.useState(false);
-    const openMenu = () => setVisible(true);
-    const closeMenu = () => setVisible(false);
-    
+    const getVaccinesByUser = async () => {
+        let request = await fetch(config.url + 'getVaccinesByUser', {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify({token: token, user: ID})
+        })
+        let res = await request.json()
+        setVaccines(res)
+    }
+
+    useEffect(() => {
+        let p = getVaccinesByUser()
+    }, [])
+
     return (
         <SafeAreaView>
             <ScrollView>
                 <View style={[styles.container, {marginTop:30}]}>
-                
-                
-                <View style={[styles.card, styles.shadow ]}>
-                        <Text style={styles.cardTitle}>Covid 19</Text> 
-                        <View style={styles.cardContent}>
-                            <Text style={styles.textContent}>Última Dose: 19/04/2022</Text>
-                            <Text style={styles.textContent}>Dose Reforço: 19/04/2028</Text>
-                            <Text style={styles.textContent}>Download</Text>
-                        </View>        
+
+                    <View style={styles.container}>
+                        {vaccines.map((vaccine) => {
+                            return (
+                                <View>
+                                    <Text>{vaccine.vaccine}</Text>
+                                    <Text>{vaccine.date.split('T')[0]}</Text>
+                                </View>
+                                )
+                        })}
                     </View>
-                    <View style={[styles.card, styles.shadow ]}>
-                        <Text style={styles.cardTitle}>Tétano</Text> 
-                        <View style={styles.cardContent}>
-                            <Text style={styles.textContent}>Última Dose: 19/04/2022</Text>
-                            <Text style={styles.textContent}>Dose Reforço: 19/04/2028</Text>
-                            <Text style={styles.textContent}>Download</Text>
-                        </View>        
-                    </View>
-                    <View style={[styles.card, styles.shadow ]}>
-                        <Text style={styles.cardTitle}>Gripe h1n1</Text> 
-                        <View style={styles.cardContent}>
-                            <Text style={styles.textContent}>Última Dose: 19/04/2022</Text>
-                            <Text style={styles.textContent}>Dose Reforço: 19/04/2028</Text>
-                            <Text style={styles.textContent}>Download</Text>
-                        </View>        
-                    </View>
-                    <View style={[styles.card, styles.shadow ]}>
-                        <Text style={styles.cardTitle}>Covid 19</Text> 
-                        <View style={styles.cardContent}>
-                            <Text style={styles.textContent}>Última Dose: 19/04/2022</Text>
-                            <Text style={styles.textContent}>Dose Reforço: 19/04/2028</Text>
-                            <Text style={styles.textContent}>Download</Text>
-                        </View>        
-                    </View>
-                    <View style={[styles.card, styles.shadow ]}>
-                        <Text style={styles.cardTitle}>Covid 19</Text> 
-                        <View style={styles.cardContent}>
-                            <Text style={styles.textContent}>Última Dose: 19/04/2022</Text>
-                            <Text style={styles.textContent}>Dose Reforço: 19/04/2028</Text>
-                            <Text style={styles.textContent}>Download</Text>
-                        </View>        
-                    </View>
-                    
-                    <TouchableOpacity
-                        style = {[styles.button, {backgroundColor:'#000000'}]}
-                    onPress = {() => logout()}
-                    >
-                        <Text style={styles.buttonTitle}>SAIR</Text>
-                    </TouchableOpacity>
                 
                     <StatusBar style="auto" />
                 </View>
