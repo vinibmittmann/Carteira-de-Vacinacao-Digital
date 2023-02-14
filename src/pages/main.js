@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles'
 import {AuthContext} from '../contexts/auth'
 import config from '../../config/config.json'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function MainScreen()  {
@@ -32,10 +33,15 @@ export default function MainScreen()  {
                     <View style={styles.container}>
                         {vaccines.map((vaccine) => {
                             return (
-                                <View>
-                                    <Text>{vaccine.vaccine}</Text>
-                                    <Text>{vaccine.date.split('T')[0]}</Text>
+                                 <View style={[styles.card, styles.shadow ]} key={vaccine.id}>
+                                    <Text style={styles.cardTitle}>{vaccine.vaccine}</Text> 
+                                    <View style={styles.cardContent}>
+                                        <Text style={styles.textContent}>Última Dose</Text>
+                                        <Text style={styles.textContent}>{vaccine.date.split('T')[0]}</Text>
+                                        {/* <Text style={styles.textContent}>Download</Text> */}
+                                    </View>        
                                 </View>
+
                                 )
                         })}
                     </View>
