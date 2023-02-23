@@ -28,10 +28,10 @@ const EmployeeRoute: React.FC = () => (
             headerShown: true,
             headerTitle: 'Novo Usuário',
             headerTitleStyle: {
-                color: "white"
+                color: "white",
             },
             headerStyle: {
-                backgroundColor: "#7A6DCC"
+                backgroundColor: "#5042AB",
             }
         }}/>
         <EmployeeStack.Screen name="Aplicação de Vacina" component={VaccinateScreen} options={{
@@ -41,7 +41,7 @@ const EmployeeRoute: React.FC = () => (
                 color: "white"
             },
             headerStyle: {
-                backgroundColor: "#7A6DCC"
+                backgroundColor: "#5042AB"
             }
         }}/>
     </EmployeeStack.Navigator>

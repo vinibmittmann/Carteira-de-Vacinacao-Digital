@@ -30,20 +30,19 @@ export const styles = StyleSheet.create({
     textInput: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 300,
-        height: 36,
+        width: '100%',
+        height: 40,
         backgroundColor: "#FAFAFA",
-        marginVertical: 6,
+        marginVertical: 10,
         includeFontPadding: true,
-        paddingLeft: 8,
-        borderRadius: 16,
+        paddingLeft: 10,
+        borderRadius: 10,
         borderColor: "#8C8C8C",
         borderWidth: 1
     },
     button: {
         fontSize: 14,
         backgroundColor: "#153586",
-        width: 191,
         height: 36,
         borderRadius: 16,
         justifyContent: "center",
@@ -80,7 +79,7 @@ export const styles = StyleSheet.create({
     card:{
         width: 350,
         height: 130,
-        borderColor: '#7A6DCC',
+        borderColor: '#5042AB',
         borderWidth: 1,
         marginBottom: 10,
 
@@ -98,15 +97,15 @@ export const styles = StyleSheet.create({
         fontSize: 22,
         lineHeight: 75,
         alignContent: 'flex-start',
-        color: "#7A6DCC",
+        color: "#5042AB",
         textTransform: 'uppercase'
     },
     cardContent:{
         alignItems: 'flex-end',
-        color: "#7A6DCC",
+        color: "#5042AB",
     },
     textContent:{
-        color: "#7A6DCC",
+        color: "#5042AB",
     },
 
 
@@ -118,7 +117,13 @@ export const styles = StyleSheet.create({
         elevation:0,
       },
 
+    loginContainer: {
+        paddingRight:50,
+        paddingLeft: 50,
+        alignItems: 'center',
+    }
 
+    
 
 
 

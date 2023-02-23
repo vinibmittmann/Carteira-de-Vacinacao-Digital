@@ -48,102 +48,105 @@ export default function AddUserScreen({ navigation }) {
   }
   
   return (
-    <View style={styles.container}>
-      <ScrollView style={{width: "77%"}}>
-      <Controller
-        control={control}
-        name="name"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "Nome"
-            onChangeText = {onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.name && <Text style={styles.labelError}>{errors.name?.message}</Text>}
-
-      <Controller
-        control={control}
-        name="cpf"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "CPF"
-            onChangeText = {onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.cpf && <Text style={styles.labelError}>{errors.cpf?.message}</Text>}
-      
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "E-mail"
-            onChangeText = {onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.email && <Text style={styles.labelError}>{errors.email?.message}</Text>}
-
-      <Controller
-        control={control}
-        name="birth"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "Data de nascimento"
-            onChangeText = {onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.birth && <Text style={styles.labelError}>{errors.birth?.message}</Text>}
-
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "Senha"
-            onChangeText = {onChange}
-            secureTextEntry = {true}
-            value={value}
-          />
-        )}
-      /> 
-      {errors.password && <Text style={styles.labelError}>{errors.password?.message}</Text>}
+    
+    <View>
+      <ScrollView style={{padding:50}}>
         
-      <Controller
-        control={control}
-        name="password2"
-        render={({ field: { onChange, value} }) => (
-          <TextInput
-            style={styles.textInput}
-            placeholder = "Confirme sua senha"
-            onChangeText = {onChange}
-            secureTextEntry = {true}
-            value={value}
-          />
-        )}
-      /> 
-      {errors.password2 && <Text style={styles.labelError}>{errors.password2?.message}</Text>}
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "Nome"
+              onChangeText = {onChange}
+              value={value}
+            />
+          )}
+        />
+        {errors.name && <Text style={styles.labelError}>{errors.name?.message}</Text>}
 
-      <TouchableOpacity
-        style = {styles.buttonPaciente}
-        onPress = {handleSubmit(registerUser)}
-        >
-          <Text style = {styles.buttonTitle}>Confirmar Cadastro</Text>
-        </TouchableOpacity>
+        <Controller
+          control={control}
+          name="cpf"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "CPF"
+              onChangeText = {onChange}
+              value={value}
+            />
+          )}
+        />
+        {errors.cpf && <Text style={styles.labelError}>{errors.cpf?.message}</Text>}
         
-      <StatusBar style="auto" />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "E-mail"
+              onChangeText = {onChange}
+              value={value}
+            />
+          )}
+        />
+        {errors.email && <Text style={styles.labelError}>{errors.email?.message}</Text>}
+
+        <Controller
+          control={control}
+          name="birth"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "Data de nascimento"
+              onChangeText = {onChange}
+              value={value}
+            />
+          )}
+        />
+        {errors.birth && <Text style={styles.labelError}>{errors.birth?.message}</Text>}
+
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "Senha"
+              onChangeText = {onChange}
+              secureTextEntry = {true}
+              value={value}
+            />
+          )}
+        /> 
+        {errors.password && <Text style={styles.labelError}>{errors.password?.message}</Text>}
+          
+        <Controller
+          control={control}
+          name="password2"
+          render={({ field: { onChange, value} }) => (
+            <TextInput
+              style={styles.textInput}
+              placeholder = "Confirme sua senha"
+              onChangeText = {onChange}
+              secureTextEntry = {true}
+              value={value}
+            />
+          )}
+        /> 
+        {errors.password2 && <Text style={styles.labelError}>{errors.password2?.message}</Text>}
+
+        <TouchableOpacity
+          style={[styles.buttonPaciente, {backgroundColor: '#5042AB', width: '100%'}]}
+          onPress = {handleSubmit(registerUser)}
+          >
+            <Text style = {styles.buttonTitle}>Confirmar Cadastro</Text>
+          </TouchableOpacity>
+          
+        <StatusBar style="auto" />
+
       </ScrollView>
     </View>
   );

@@ -11,10 +11,8 @@ export default function LoginScreen({navigation}) {
     const {login, error} = useContext(AuthContext)
 
     return (
-        <View style={styles.container}>
-            <Text style={[styles.logo, {paddingTop: 165}]}>CARTEIRA</Text>
-            <Text style={styles.logo}>DE VACINAÇÃO</Text>
-            <Text style={[styles.logo, {paddingBottom: 115}]}>DIGITAL</Text>
+        <View style={styles.loginContainer}>
+            <Text style={[styles.logo, {paddingTop: 165, paddingBottom: 50, textAlign: 'center'}]}>CARTEIRA DE VACINAÇÃO DIGITAL</Text>
 
             <Text style={styles.error}> {error} </Text>
             <TextInput
@@ -33,11 +31,11 @@ export default function LoginScreen({navigation}) {
             <TouchableOpacity
                 onPress={null}
             >
-                <Text style={[styles.link, {color: '#000000'}]}>Esqueceu sua senha?</Text>
+                <Text style={[styles.link, {color: '#5042AB'}]}>Esqueceu sua senha?</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={[styles.button, {backgroundColor: '#000000'}]}
+                style={[styles.button, {backgroundColor: '#5042AB', width: '100%'}]}
                 onPress={() => login(email, password)}
             >
                 <Text style={styles.buttonTitle}>ENTRAR</Text>

@@ -18,9 +18,15 @@ function CustomDrawerContent(props) {
 
 const UserRoute: React.FC = () => (
     <UserStack.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-        <UserStack.Screen name="Carteira de Vacinação" component={MainScreen} options={{
-            headerShown: true
-
+        <UserStack.Screen name="Carteira de Vacinação" component={MainScreen}options={{
+            headerShown: true,
+            headerTitle: 'Carteira de Vacinação',
+            headerTitleStyle: {
+                color: "white",
+            },
+            headerStyle: {
+                backgroundColor: "#5042AB",
+            }
         }}/>
     </UserStack.Navigator>
 )

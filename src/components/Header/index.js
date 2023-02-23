@@ -14,7 +14,7 @@ const Header = () => {
       <View style={{ 
         width: 500,
         height: 100,
-        backgroundColor: '#7A6DCC',
+        backgroundColor: '#5042AB',
         }}>
         
         <View

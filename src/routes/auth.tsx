@@ -15,7 +15,7 @@ const AuthRoute: React.FC = () => (
                 color: "white"
             },
             headerStyle: {
-                backgroundColor: "#7A6DCC"
+                backgroundColor: "#5042AB"
             }
         }}/>
     </AuthStack.Navigator>

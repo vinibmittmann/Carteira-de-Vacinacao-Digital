@@ -64,7 +64,7 @@ export default function LoginScreen() {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {padding: 50}]}>
 
             <DropDownPicker
                 placeholder="Selecione uma vacina"
@@ -79,9 +79,9 @@ export default function LoginScreen() {
                 onChangeValue={(value) => {getVaccine(value)}}
             />
 
-            <Text>{vaccine === null ? '' : vaccine.name}</Text>
-            <Text>{vaccine === null ? '' : vaccine.manufacturer}</Text>
-            <Text>{vaccine === null ? '' : vaccine.dosage}</Text>
+            {/* <Text>{vaccine === null ? '' : vaccine.name}</Text> */}
+            {/* <Text>{vaccine === null ? '' : vaccine.manufacturer}</Text>
+            <Text>{vaccine === null ? '' : vaccine.dosage}</Text> */}
 
             <TextInput
                 style={styles.textInput}
@@ -93,7 +93,7 @@ export default function LoginScreen() {
             <Text>{user === null ? '' : user.name}</Text>
 
             <TouchableOpacity
-                style={[styles.button, {backgroundColor: '#000000'}]}
+                style={[styles.button, {backgroundColor: '#5042AB', width: '100%'}]}
                 onPress={() => applyVaccine()}
             >
                 <Text style={styles.buttonTitle}>CONFIRMAR</Text>
